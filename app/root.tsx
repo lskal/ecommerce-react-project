@@ -17,6 +17,11 @@ import styles from "./root.module.scss";
 import Header from "./components/hearer/header";
 
 export const links: Route.LinksFunction = () => [
+  { rel: "icon", href: "/favicon/favicon.ico", sizes: "any" },
+  { rel: "icon", href: "/favicon/favicon.svg", type: "image/svg+xml" },
+  { rel: "icon", href: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+  { rel: "apple-touch-icon", href: "/favicon/apple-touch-icon.png", sizes: "180x180" },
+  { rel: "manifest", href: "/favicon/site.webmanifest" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
