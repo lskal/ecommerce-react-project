@@ -6,11 +6,11 @@ node_modules/
 
 build/
 dist/
+.react-router/
 
 # vite cache
 
 .vite/
-node_modules/.vite/
 
 # logs
 
@@ -30,10 +30,15 @@ pnpm-debug.log*
 
 *.tsbuildinfo
 
-# editor folders
+# IDE folders
 
-.vscode/
 .idea/
+
+# VSCode
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 
 # OS files
 

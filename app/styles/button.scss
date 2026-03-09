@@ -1,0 +1,11 @@
+@use "sass:color";
+
+$brand: #2563eb;
+
+.button {
+  background: $brand;
+
+  &:hover {
+    background: color.adjust($brand, $lightness: -10%);
+  }
+}

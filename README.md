@@ -14,9 +14,11 @@ A modern, production-ready template for building full-stack React applications u
 - 🎉 TailwindCSS for styling
 - 📖 [React Router docs](https://reactrouter.com/)
 
-## Getting Started
+---
 
-### Installation
+# Getting Started
+
+## Installation
 
 Install the dependencies:
 
@@ -24,7 +26,9 @@ Install the dependencies:
 npm install
 ```
 
-### Development
+---
+
+## Development
 
 Start the development server with HMR:
 
@@ -32,9 +36,15 @@ Start the development server with HMR:
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Your application will be available at:
 
-## Building for Production
+```
+http://localhost:5173
+```
+
+---
+
+# Building for Production
 
 Create a production build:
 
@@ -42,11 +52,29 @@ Create a production build:
 npm run build
 ```
 
-## Development Utilities
+---
+
+## Run the Production Server
+
+After building the project, start the production server:
+
+```bash
+npm run start
+```
+
+The application will run at:
+
+```
+http://localhost:3000
+```
+
+---
+
+# Development Utilities
 
 This project includes several helper scripts to simplify common development tasks such as cleaning the workspace, reinstalling dependencies, formatting code, and running project checks.
 
-### Cleaning the Project
+## Cleaning the Project
 
 Remove all generated files, caches, and dependencies:
 
@@ -62,7 +90,9 @@ This removes:
 - `.vite`
 - `.cache`
 
-### Reinstall Dependencies
+---
+
+## Reinstall Dependencies
 
 Clean the project and reinstall dependencies:
 
@@ -70,7 +100,9 @@ Clean the project and reinstall dependencies:
 npm run reinstall
 ```
 
-### Fresh Start
+---
+
+## Fresh Start
 
 Completely reset the project, reinstall dependencies, and start the development server:
 
@@ -78,9 +110,11 @@ Completely reset the project, reinstall dependencies, and start the development 
 npm run fresh
 ```
 
-This is useful when dependencies or build caches become corrupted.
+Useful when dependencies or build caches become corrupted.
 
-### Code Formatting
+---
+
+## Code Formatting
 
 Format the entire project using Prettier:
 
@@ -94,7 +128,9 @@ Check if the project is properly formatted (without modifying files):
 npm run format:check
 ```
 
-### Linting and Type Checking
+---
+
+## Linting and Type Checking
 
 Run formatting checks and TypeScript type checking:
 
@@ -107,20 +143,21 @@ This command ensures:
 - Code formatting is consistent
 - TypeScript types are valid
 
-## Deployment
+---
 
-### Docker Deployment
+# Deployment
+
+## Docker Deployment
 
 To build and run using Docker:
 
 ```bash
 docker build -t my-app .
 
-# Run the container
 docker run -p 3000:3000 my-app
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+The containerized application can be deployed to platforms such as:
 
 - AWS ECS
 - Google Cloud Run
@@ -129,23 +166,35 @@ The containerized application can be deployed to any platform that supports Dock
 - Fly.io
 - Railway
 
-### DIY Deployment
+---
+
+## DIY Deployment
 
 If you're familiar with deploying Node applications, the built-in app server is production-ready.
 
-Make sure to deploy the output of `npm run build`
+Deploy the output of:
+
+```bash
+npm run build
+```
+
+Expected structure:
 
 ```
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── package-lock.json
 ├── build/
 │   ├── client/    # Static assets
 │   └── server/    # Server-side code
 ```
 
-## Styling
+---
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+# Styling
+
+This template includes [Tailwind CSS](https://tailwindcss.com/) preconfigured for a simple default starting experience.
+
+You may use any CSS methodology you prefer (Tailwind utilities, SCSS modules, CSS files, etc.).
 
 ---
 
