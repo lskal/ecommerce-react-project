@@ -5,11 +5,16 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from "react-router";
-
 import type { Route } from "./+types/root";
+
+import NotFound from "./components/not-found/not-found";
+
 import "./app.css";
 import "./styles/button.scss";
+import styles from "./root.module.scss";
+import Header from "./components/hearer/header";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -34,9 +39,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <Header />
+        <main className={styles.main}>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </main>
       </body>
     </html>
   );
@@ -46,29 +54,30 @@ export default function App() {
   return <Outlet />;
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
+export function ErrorBoundary() {
+  const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404 ? "The requested page could not be found." : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
+    if (error.status === 404) {
+      return <NotFound message="This route doesn't exist in our store." />;
+    }
+
+    return (
+      <main>
+        <h1>Error {error.status}</h1>
+        <p>{error.statusText}</p>
+      </main>
+    );
   }
 
-  return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
-  );
+  if (error instanceof Error) {
+    return (
+      <main>
+        <h1>Unexpected error</h1>
+        <p>{error.message}</p>
+      </main>
+    );
+  }
+
+  return <NotFound />;
 }

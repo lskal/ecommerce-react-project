@@ -1,13 +1,19 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
+import HomeMainComponet from "../components/home-main-componet/home-main-componet";
+
+// TODO: fix metadata
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { name: "HOMEPAGE", content: "this is the home page" },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <>
+      <HomeMainComponet />
+    </>
+  );
 }

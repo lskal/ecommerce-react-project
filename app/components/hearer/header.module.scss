@@ -1,0 +1,23 @@
+.header {
+  background-color: tomato;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+
+  .left {
+    .logo {
+      border: 5px solid black;
+      padding: 0.5rem;
+      margin: 1rem;
+      border-radius: var(--radius);
+      width: fit-content;
+    }
+  }
+
+  .right {
+    display: flex;
+    gap: 1rem;
+  }
+}
