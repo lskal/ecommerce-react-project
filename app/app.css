@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* import your sass modules */
+@import "./styles/button.scss";
+
 @theme {
   --font-sans:
     "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
