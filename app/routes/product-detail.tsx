@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 
-// TODO: rename metadata
+// TODO: fix metadata
 export function meta({}: Route.MetaArgs) {
   return [{ name: "product page", content: "this is the product page" }];
 }

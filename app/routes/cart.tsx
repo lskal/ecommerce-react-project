@@ -1,8 +1,8 @@
 import type { Route } from "./+types/home";
 
-// TODO: rename metadata
+// TODO: fix metadata
 export function meta({}: Route.MetaArgs) {
-  return [{ name: "cart", content: "this is the cart page" }];
+  return [{ name: "cart", content: "this is the cart page " }];
 }
 
 export default function Cart() {
