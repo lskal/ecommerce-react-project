@@ -13,6 +13,8 @@ import NotFound from "./components/not-found/not-found";
 
 import "./app.css";
 import "./styles/button.scss";
+import styles from "./root.module.scss";
+import Header from "./components/hearer/header";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -37,9 +39,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <Header />
+        <main className={styles.main}>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </main>
       </body>
     </html>
   );
