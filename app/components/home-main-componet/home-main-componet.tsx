@@ -1,11 +1,13 @@
 import { Icon } from "@iconify/react";
-import { Link } from "react-router";
+import styles from "./home-main-componet.module.scss";
 
 export default function homeMainComponet() {
   return (
     <>
-      <Icon color="tomato" height={50} icon="mdi-light:home" />
-      <h1>WELCOME TO THE HOMEPAGE</h1>
+      <div className={styles.container}>
+        <Icon color="tomato" height={50} icon="mdi-light:home" />
+        <h1>WELCOME TO THE HOMEPAGE</h1>
+      </div>
     </>
   );
 }
