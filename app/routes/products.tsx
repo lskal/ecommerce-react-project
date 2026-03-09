@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
+// TODO: rename metadata
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -8,11 +8,10 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Home() {
+export default function Product() {
   return (
     <>
-      <p>home</p>
-      <Welcome />;
+      <p>products</p>
     </>
   );
 }
