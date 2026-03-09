@@ -42,6 +42,71 @@ Create a production build:
 npm run build
 ```
 
+## Development Utilities
+
+This project includes several helper scripts to simplify common development tasks such as cleaning the workspace, reinstalling dependencies, formatting code, and running project checks.
+
+### Cleaning the Project
+
+Remove all generated files, caches, and dependencies:
+
+```bash
+npm run clean
+```
+
+This removes:
+
+- `node_modules`
+- `build`
+- `dist`
+- `.vite`
+- `.cache`
+
+### Reinstall Dependencies
+
+Clean the project and reinstall dependencies:
+
+```bash
+npm run reinstall
+```
+
+### Fresh Start
+
+Completely reset the project, reinstall dependencies, and start the development server:
+
+```bash
+npm run fresh
+```
+
+This is useful when dependencies or build caches become corrupted.
+
+### Code Formatting
+
+Format the entire project using Prettier:
+
+```bash
+npm run format
+```
+
+Check if the project is properly formatted (without modifying files):
+
+```bash
+npm run format:check
+```
+
+### Linting and Type Checking
+
+Run formatting checks and TypeScript type checking:
+
+```bash
+npm run lint
+```
+
+This command ensures:
+
+- Code formatting is consistent
+- TypeScript types are valid
+
 ## Deployment
 
 ### Docker Deployment
