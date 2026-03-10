@@ -1,0 +1,1 @@
+import{w as r,p as t}from"./chunk-EPOLDU6W-DkaF_4p7.js";function a({}){return[{name:"cart",content:"this is the cart page "}]}const o=r(function(){return t.jsx(t.Fragment,{children:t.jsx("p",{children:"cart "})})});export{o as default,a as meta};

@@ -1,1 +1,0 @@
-import{w as e,p as t}from"./chunk-EPOLDU6W-BToQmgqL.js";function o({}){return[{name:"product page",content:"this is the product page"}]}const p=e(function(){return t.jsxs(t.Fragment,{children:[t.jsx("p",{children:"product-details"}),t.jsx("p",{children:"id product"})]})});export{p as default,o as meta};
