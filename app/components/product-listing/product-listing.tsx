@@ -1,4 +1,5 @@
 import { useProducts } from "../../hooks/useProducts";
+import ProductTile from "../product-tile/product-tile";
 import styles from "./product-listing.module.scss";
 
 export default function productListing() {
@@ -11,9 +12,7 @@ export default function productListing() {
     <>
       <div className={styles.plpWrapper}>
         {products.map((product) => (
-          <p key={product.id}>
-            {product.title}: {product.price}
-          </p>
+          <ProductTile product={product} key={product.id} />
         ))}
       </div>
     </>

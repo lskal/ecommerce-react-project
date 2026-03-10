@@ -1,0 +1,4 @@
+.tile {
+  width: calc((100% - (var(--spacing) * 3)) / 4);
+  box-sizing: border-box;
+}

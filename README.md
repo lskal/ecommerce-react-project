@@ -151,17 +151,7 @@ This command ensures:
 
 This project can be deployed as a static site using **GitHub Pages**.
 
-### Install the deployment dependency
-
-First install the `gh-pages` package:
-
-```bash
-npm install gh-pages --save-dev
-```
-
-### Configure the deploy script
-
-Add the following script to your `package.json`:
+### deploy script
 
 ```json
 "deploy": "npm run build && cp build/client/index.html build/client/404.html || copy build\\client\\index.html build\\client\\404.html && gh-pages -d build/client"
@@ -170,7 +160,7 @@ Add the following script to your `package.json`:
 This command performs the following steps:
 
 1. **Build the project**
-2. **Create a `404.html` fallback** (required for SPA routing on GitHub Pages)
+2. **Create a `404.html` fallback** (required for SPA routing on GitHub Pages) with mac and windows fallback script
 3. **Publish the contents of `build/client`** to the `gh-pages` branch
 
 The `404.html` file ensures that client-side routes like `/products` or `/cart` continue to work when refreshing the page or opening them directly.
@@ -185,26 +175,9 @@ npm run deploy
 
 This will push the production build to the `gh-pages` branch.
 
-### Configure GitHub Pages
-
-In your repository settings:
-
-```
-Settings → Pages
-Source: Deploy from a branch
-Branch: gh-pages
-Folder: / (root)
-```
-
 ### Access the deployed site
 
 Your site will be available at:
-
-```
-https://<username>.github.io/<repository-name>/
-```
-
-Example:
 
 ```
 https://lskal.github.io/ecommerce-react-project/
@@ -259,7 +232,7 @@ Expected structure:
 
 This template includes [Tailwind CSS](https://tailwindcss.com/) preconfigured for a simple default starting experience.
 
-You may use any CSS methodology you prefer (Tailwind utilities, SCSS modules, CSS files, etc.).
+#### I advice to use module css (using scss) with as `component-name.module.scss` naming convention
 
 ---
 
