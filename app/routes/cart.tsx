@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 
-// TODO: fix metadata
+// TODO: fix better metadata
 export function meta({}: Route.MetaArgs) {
   return [{ name: "cart", content: "this is the cart page " }];
 }
