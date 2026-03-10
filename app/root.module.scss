@@ -1,4 +1,8 @@
 .main {
   height: 100%;
   padding: var(--container-padding);
+
+  &.mainError {
+    padding: 0;
+  }
 }
