@@ -32,25 +32,24 @@ export function useProducts({
 
     if (skip !== undefined) params.set("skip", String(skip));
     if (select) params.set("select", select);
-
-    if (mode === "search" && search) {
-      params.set("q", search);
-    }
-
+    if (mode === "search" && search) params.set("q", search);
     if (sortBy) params.set("sortBy", sortBy);
     if (order) params.set("order", order);
 
     return params.toString();
   }, [limit, skip, select, sortBy, order, search, mode]);
 
-  // fetch products based on baseUrl and queryString
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchProducts() {
       try {
         setLoading(true);
         setError(null);
 
-        const res = await fetch(`${baseUrl}?${queryString}`);
+        const res = await fetch(`${baseUrl}?${queryString}`, {
+          signal: controller.signal,
+        });
 
         if (!res.ok) {
           throw new Error("Failed to fetch products");
@@ -59,6 +58,7 @@ export function useProducts({
         const data: IProductsResponse = await res.json();
         setProducts(data.products || []);
       } catch (err) {
+        if ((err as Error).name === "AbortError") return;
         setError(err as Error);
         setProducts([]);
       } finally {
@@ -67,6 +67,8 @@ export function useProducts({
     }
 
     fetchProducts();
+
+    return () => controller.abort();
   }, [baseUrl, queryString]);
 
   return { products, loading, error };

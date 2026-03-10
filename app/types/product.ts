@@ -1,3 +1,7 @@
+/* general */
+export type TNumberLike = number | `${number}`;
+/* general */
+
 /* main response fetch */
 export interface IProductsResponse {
   products?: IProduct[];
@@ -71,5 +75,10 @@ export interface IProductsFetchParams {
   order?: "asc" | "desc";
   category?: string;
   search?: string;
+}
+
+export interface IProductListingProps extends IProductsFetchParams {
+  randomProducts?: boolean;
+  numberRandomProducts?: number;
 }
 /* option params query from https://dummyjson.com/docs/products */

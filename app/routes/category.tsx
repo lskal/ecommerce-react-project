@@ -6,7 +6,7 @@ export function meta({}: Route.MetaArgs) {
   return [{ name: "category page", content: "this is the category page " }];
 }
 
-export default function Cart() {
+export default function Category() {
   return (
     <>
       <ProductListing category="smartphones" />
