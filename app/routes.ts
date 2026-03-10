@@ -4,5 +4,5 @@ export default [
   route("/", "./routes/home.tsx"),
   route("/products", "./routes/products.tsx"),
   route("/products/:id", "./routes/product-detail.tsx"),
-  route("/cart", "./routes/cart.tsx"),
+  route("/category", "./routes/category.tsx"),
 ] satisfies RouteConfig;

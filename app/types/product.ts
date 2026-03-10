@@ -1,3 +1,14 @@
+/* main response fetch */
+export interface IProductsResponse {
+  products?: IProduct[];
+  total?: number;
+  skip?: number;
+  limit?: number;
+  filter?: string;
+}
+/* main response fetch */
+
+/* single product */
 export interface IProduct {
   id: number;
   title: string;
@@ -49,16 +60,9 @@ export interface IReview {
   reviewerName: string;
   reviewerEmail: string;
 }
+/* single product */
 
-export interface IProductsResponse {
-  products?: IProduct[];
-  total?: number;
-  skip?: number;
-  limit?: number;
-  filter?: string;
-}
-
-// https://dummyjson.com/docs/products option params query
+/* option params query from https://dummyjson.com/docs/products */
 export interface IProductsFetchParams {
   limit?: number;
   skip?: number;
@@ -68,3 +72,4 @@ export interface IProductsFetchParams {
   category?: string;
   search?: string;
 }
+/* option params query from https://dummyjson.com/docs/products */
