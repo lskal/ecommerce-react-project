@@ -1,1 +1,0 @@
-import{w as t,p as o}from"./chunk-EPOLDU6W-CY9FVjV8.js";import{N as n}from"./not-found-OK_YTU65.js";function a({}){return[{title:"404 page New React Router App"},{name:"404 page",content:"this is the 404 page"}]}const s=t(function(){return o.jsx(n,{})});export{s as default,a as meta};
