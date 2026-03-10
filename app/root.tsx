@@ -15,6 +15,7 @@ import Header from "./components/hearer/header";
 import "./app.css";
 import "./styles/button.scss";
 import styles from "./root.module.scss";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export const links: Route.LinksFunction = () => {
   const baseUrl = import.meta.env.BASE_URL;

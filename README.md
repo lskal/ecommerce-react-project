@@ -163,7 +163,7 @@ This command performs the following steps:
 2. **Create a `404.html` fallback** (required for SPA routing on GitHub Pages) with mac and windows fallback script
 3. **Publish the contents of `build/client`** to the `gh-pages` branch
 
-The `404.html` file ensures that client-side routes like `/products` or `/cart` continue to work when refreshing the page or opening them directly.
+The `404.html` file ensures that client-side routes like `/products` or `/category` continue to work when refreshing the page or opening them directly.
 
 ### Deploy the project
 

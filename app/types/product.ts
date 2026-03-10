@@ -1,3 +1,18 @@
+/* general */
+export type TNumberLike = number | `${number}`;
+/* general */
+
+/* main response fetch */
+export interface IProductsResponse {
+  products?: IProduct[];
+  total?: number;
+  skip?: number;
+  limit?: number;
+  filter?: string;
+}
+/* main response fetch */
+
+/* single product */
 export interface IProduct {
   id: number;
   title: string;
@@ -49,20 +64,21 @@ export interface IReview {
   reviewerName: string;
   reviewerEmail: string;
 }
+/* single product */
 
-export interface IProductsResponse {
-  products?: IProduct[];
-  total?: number;
-  skip?: number;
-  limit?: number;
-  filter?: string;
-}
-
-// TODO: find usage
-export interface ProductsQueryParams {
+/* option params query from https://dummyjson.com/docs/products */
+export interface IProductsFetchParams {
   limit?: number;
   skip?: number;
-  select?: string; // e.g. "title,price"
-  sortBy?: string; // e.g. "title"
+  select?: string;
+  sortBy?: string;
   order?: "asc" | "desc";
+  category?: string;
+  search?: string;
 }
+
+export interface IProductListingProps extends IProductsFetchParams {
+  randomProducts?: boolean;
+  numberRandomProducts?: number;
+}
+/* option params query from https://dummyjson.com/docs/products */

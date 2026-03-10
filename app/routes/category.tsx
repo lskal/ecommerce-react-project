@@ -3,13 +3,13 @@ import type { Route } from "./+types/home";
 
 // TODO: fix better metadata
 export function meta({}: Route.MetaArgs) {
-  return [{ name: "products listing", content: "this is the products page" }];
+  return [{ name: "category page", content: "this is the category page " }];
 }
 
-export default function Products() {
+export default function Category() {
   return (
     <>
-      <ProductListing limitFetch={50} />
+      <ProductListing category="smartphones" />
     </>
   );
 }
