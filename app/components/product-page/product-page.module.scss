@@ -1,0 +1,13 @@
+.containerProduct {
+  display: flex;
+
+  flex-direction: row;
+  gap: var(--spacing);
+
+  .left {
+    width: 60%;
+  }
+  .right {
+    width: 40%;
+  }
+}

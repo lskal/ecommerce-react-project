@@ -9,7 +9,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Products() {
   return (
     <>
-      <ProductListing />
+      <ProductListing limitFetch={50} />
     </>
   );
 }

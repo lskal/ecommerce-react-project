@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import usePrice from "../../hooks/usePrice";
 import type { IProduct } from "../../types/product";
 
-import styles from "./product-tile.module.css";
+import styles from "./product-tile.module.scss";
 
 export default function productTile({ product }: { product: IProduct }) {
   return (

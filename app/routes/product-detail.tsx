@@ -1,8 +1,7 @@
 import type { Route } from "./+types/home";
 import { useProduct } from "../hooks/useProduct";
-import usePrice from "../hooks/usePrice";
 import { useParams } from "react-router";
-import NotFound from "../components/not-found/not-found";
+import ProductPage from "../components/product-page/product-page";
 
 // TODO: fix better metadata
 export function meta({}: Route.MetaArgs) {
@@ -22,11 +21,5 @@ export default function ProductDetails() {
     return <p>Sorry, the product you are looking for does not exist.</p>;
   }
 
-  return (
-    <>
-      <img src={product.images?.[0]} alt={product.title} />
-      <p>{product.title}</p>
-      <p>{usePrice(product.price)}</p>
-    </>
-  );
+  return <ProductPage product={product} />;
 }

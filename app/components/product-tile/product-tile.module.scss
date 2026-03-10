@@ -1,0 +1,14 @@
+.tile {
+  width: calc((100% - (var(--spacing) * 3)) / 4);
+  box-sizing: border-box;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  .tile img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+}

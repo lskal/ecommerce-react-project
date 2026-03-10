@@ -58,11 +58,13 @@ export interface IProductsResponse {
   filter?: string;
 }
 
-// TODO: find usage
-export interface ProductsQueryParams {
+// https://dummyjson.com/docs/products option params query
+export interface IProductsFetchParams {
   limit?: number;
   skip?: number;
-  select?: string; // e.g. "title,price"
-  sortBy?: string; // e.g. "title"
+  select?: string;
+  sortBy?: string;
   order?: "asc" | "desc";
+  category?: string;
+  search?: string;
 }
