@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build/client",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
@@ -29,6 +31,7 @@
     "@types/node": "^22",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.8.1",
     "sass": "^1.97.3",
     "tailwindcss": "^4.1.13",
