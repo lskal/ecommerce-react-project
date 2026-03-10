@@ -147,6 +147,71 @@ This command ensures:
 
 # Deployment
 
+## GitHub Pages Deployment
+
+This project can be deployed as a static site using **GitHub Pages**.
+
+### Install the deployment dependency
+
+First install the `gh-pages` package:
+
+```bash
+npm install gh-pages --save-dev
+```
+
+### Configure the deploy script
+
+Add the following script to your `package.json`:
+
+```json
+"deploy": "npm run build && cp build/client/index.html build/client/404.html || copy build\\client\\index.html build\\client\\404.html && gh-pages -d build/client"
+```
+
+This command performs the following steps:
+
+1. **Build the project**
+2. **Create a `404.html` fallback** (required for SPA routing on GitHub Pages)
+3. **Publish the contents of `build/client`** to the `gh-pages` branch
+
+The `404.html` file ensures that client-side routes like `/products` or `/cart` continue to work when refreshing the page or opening them directly.
+
+### Deploy the project
+
+Run:
+
+```bash
+npm run deploy
+```
+
+This will push the production build to the `gh-pages` branch.
+
+### Configure GitHub Pages
+
+In your repository settings:
+
+```
+Settings → Pages
+Source: Deploy from a branch
+Branch: gh-pages
+Folder: / (root)
+```
+
+### Access the deployed site
+
+Your site will be available at:
+
+```
+https://<username>.github.io/<repository-name>/
+```
+
+Example:
+
+```
+https://lskal.github.io/ecommerce-react-project/
+```
+
+---
+
 ## Docker Deployment
 
 To build and run using Docker:

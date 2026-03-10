@@ -4,8 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build/client",
+    "deploy": "npm run build && cp build/client/index.html build/client/404.html || copy build\\client\\index.html build\\client\\404.html && gh-pages -d build/client",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",

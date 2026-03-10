@@ -5,5 +5,4 @@ export default [
   route("/products", "./routes/products.tsx"),
   route("/products/:id", "./routes/product-detail.tsx"),
   route("/cart", "./routes/cart.tsx"),
-  route("*", "./routes/not-found.tsx"),
 ] satisfies RouteConfig;
