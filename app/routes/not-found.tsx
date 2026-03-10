@@ -1,7 +1,7 @@
 import NotFound from "../components/not-found/not-found";
 import type { Route } from "./+types/not-found";
 
-// TODO: fix metadata
+// TODO: fix better metadata
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "404 page New React Router App" },

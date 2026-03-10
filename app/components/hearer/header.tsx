@@ -17,7 +17,7 @@ export default function header() {
       </div>
       <div className={styles.right}>
         <Link to="/products">Products</Link>
-        <Link to="/products/2222">Product 222</Link>
+        <Link to="/products/10">Product 10</Link>
         <Link to="/cart">Cart</Link>
       </div>
     </div>
