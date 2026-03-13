@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 import styles from "./header.module.scss";
 
-export default function header() {
+export default function Header() {
   const baseUrl = import.meta.env.BASE_URL;
 
   return (
@@ -19,6 +19,7 @@ export default function header() {
         <Link to="/products/16">Apple</Link>
         <Link to="/products">All products</Link>
         <Link to="/category">Smartphones</Link>
+        <Link to="/cart">Cart</Link>
       </div>
     </div>
   );

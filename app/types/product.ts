@@ -1,6 +1,6 @@
-/* general */
+/* random number generator */
 export type TNumberLike = number | `${number}`;
-/* general */
+/* random number generator */
 
 /* main response fetch */
 export interface IProductsResponse {
@@ -82,3 +82,25 @@ export interface IProductListingProps extends IProductsFetchParams {
   numberRandomProducts?: number;
 }
 /* option params query from https://dummyjson.com/docs/products */
+
+/* zustand store cart */
+export interface ICartProduct extends IProduct {
+  quantity: number;
+}
+
+export interface ICartSingleProductProps {
+  product: ICartProduct;
+}
+
+export interface IEcommerceStore {
+  cartProducts: ICartProduct[];
+  setCartProducts: (cartProducts: ICartProduct[]) => void;
+
+  addCartProduct: (product: IProduct) => void;
+
+  increaseCartProduct: (id: number) => void;
+  decreaseCartProduct: (id: number) => void;
+
+  deleteCartProduct: (id: number) => void;
+}
+/* zustand store cart */
