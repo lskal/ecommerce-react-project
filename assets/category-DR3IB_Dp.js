@@ -1,1 +1,0 @@
-import{w as o,p as t}from"./chunk-EPOLDU6W-DkaF_4p7.js";import{P as r}from"./product-listing-BQc7kymK.js";import"./usePrice-BWmT-8GD.js";function i({}){return[{name:"category page",content:"this is the category page "}]}const m=o(function(){return t.jsx(t.Fragment,{children:t.jsx(r,{category:"smartphones"})})});export{m as default,i as meta};

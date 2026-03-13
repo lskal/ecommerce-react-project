@@ -1,0 +1,1 @@
+import{w as o,p as t}from"./chunk-EPOLDU6W-DkaF_4p7.js";import{P as r}from"./product-listing-oN3BjCC3.js";import"./usePrice-BWmT-8GD.js";function p({}){return[{name:"products listing",content:"this is the products page"}]}const c=o(function(){return t.jsx(t.Fragment,{children:t.jsx(r,{limitFetch:50})})});export{c as default,p as meta};
