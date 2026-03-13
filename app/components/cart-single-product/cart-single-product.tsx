@@ -1,3 +1,4 @@
+import { useShallow } from "zustand/shallow";
 import usePrice from "../../hooks/usePrice";
 import useEcommerceStore from "../../store/ecommerce.store";
 
@@ -6,9 +7,13 @@ import type { ICartSingleProductProps } from "../../types/product";
 import styles from "./cart-single-product.module.scss";
 
 export default function CartSingleProduct({ product }: ICartSingleProductProps) {
-  const increaseCartProduct = useEcommerceStore((state) => state.increaseCartProduct);
-  const decreaseCartProduct = useEcommerceStore((state) => state.decreaseCartProduct);
-  const deleteCartProduct = useEcommerceStore((state) => state.deleteCartProduct);
+  const { increaseCartProduct, decreaseCartProduct, deleteCartProduct } = useEcommerceStore(
+    useShallow((state) => ({
+      increaseCartProduct: state.increaseCartProduct,
+      decreaseCartProduct: state.decreaseCartProduct,
+      deleteCartProduct: state.deleteCartProduct,
+    })),
+  );
 
   return (
     <div className={styles.wrapperCartProduct}>
