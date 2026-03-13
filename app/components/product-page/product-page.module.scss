@@ -9,5 +9,18 @@
   }
   .right {
     width: 40%;
+
+    .buttonAddToCart {
+      margin-top: var(--spacing);
+      padding: var(--spacing);
+      border-radius: var(--radius);
+      border: none;
+      background-color: tomato;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ff8c42;
+      }
+    }
   }
 }

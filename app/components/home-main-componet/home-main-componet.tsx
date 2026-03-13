@@ -1,7 +1,7 @@
 import ProductListing from "../product-listing/product-listing";
 import styles from "./home-main-componet.module.scss";
 
-export default function homeMainComponet() {
+export default function HomeMainComponet() {
   return (
     <>
       <div className={styles.container}>

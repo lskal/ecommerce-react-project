@@ -4,7 +4,7 @@ import type { IProduct } from "../../types/product";
 
 import styles from "./product-tile.module.scss";
 
-export default function productTile({ product }: { product: IProduct }) {
+export default function ProductTile({ product }: { product: IProduct }) {
   return (
     <Link to={`/products/${product.id}`} className={styles.tile}>
       <img src={product.images[0]} alt={product.title} />
