@@ -9,6 +9,7 @@ import type {
 import validator from "@rjsf/validator-ajv8";
 import Form from "@rjsf/mui";
 
+// TODO: move to app/types/product.ts one day
 type TContactFormData = {
   name: string;
   customNumber: string;
@@ -123,10 +124,13 @@ export default function ContactForm() {
       validator={validator}
       formData={formData}
       widgets={{ phoneWidget: PhoneWidget }}
-      templates={{ FieldTemplate: CustomTemplate, ErrorListTemplate: () => null }}
+      templates={{ FieldTemplate: CustomTemplate }}
       transformErrors={transformErrors}
       onChange={(e) => setFormData(e.formData as TContactFormData)}
       onSubmit={({ formData }) => alert(JSON.stringify(formData, null, 2))}
+      onError={(e) => alert(JSON.stringify(e, null, 2))}
+      noHtml5Validate
+      liveValidate
     />
   );
 }
