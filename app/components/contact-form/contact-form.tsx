@@ -11,22 +11,32 @@ import Form from "@rjsf/mui";
 
 type TContactFormData = {
   name: string;
-  phoneNumber: string;
+  customNumber: string;
   certificated: boolean;
 };
 
 const schema: RJSFSchema = {
-  title: "Todo",
   type: "object",
-  required: ["name", "phoneNumber"],
+  required: ["name", "customNumber"],
   properties: {
     name: { type: "string", title: "Name Surname", pattern: "^[a-zA-Z\\s]+$" },
-    phoneNumber: {
+    customNumber: {
       type: "string",
       title: "Phone number",
       pattern: "^[0-9]{6,15}$",
     },
     certificated: { type: "boolean", title: "Certificated?" },
+  },
+  if: { properties: { certificated: { const: true } } },
+  then: {
+    properties: {
+      customNumber: {
+        title: "Employee ID",
+        pattern: undefined,
+        minLength: 3,
+        maxLength: 6,
+      },
+    },
   },
 };
 
@@ -66,7 +76,7 @@ function CustomTemplate(props: FieldTemplateProps) {
 
 const transformErrors = (errors: RJSFValidationError[]) =>
   errors.map((error) => {
-    if (error.name === "pattern" && error.property === ".phoneNumber") {
+    if (error.name === "pattern" && error.property === ".customNumber") {
       return {
         ...error,
         message: "Phone number must contain only digits and be 6 to 15 characters long",
@@ -75,13 +85,19 @@ const transformErrors = (errors: RJSFValidationError[]) =>
     if (error.name === "pattern" && error.property === ".name") {
       return { ...error, message: "Name must contain only letters" };
     }
+    if (error.name === "minLength" && error.property === ".customNumber") {
+      return { ...error, message: "Employee ID must be at least 3 characters" };
+    }
+    if (error.name === "maxLength" && error.property === ".customNumber") {
+      return { ...error, message: "Employee ID must be at most 6 characters" };
+    }
     return error;
   });
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<TContactFormData>({
     name: "",
-    phoneNumber: "",
+    customNumber: "",
     certificated: false,
   });
 
@@ -91,12 +107,10 @@ export default function ContactForm() {
         "ui:autofocus": true,
         "ui:placeholder": formData.certificated ? "Certified person name" : "Enter full name",
       },
-      phoneNumber: {
-        "ui:widget": "phoneWidget",
-        "ui:placeholder": formData.certificated ? "Priority contact number" : "Enter digits only",
-        "ui:help": formData.certificated
-          ? "Certified contact: use main business number"
-          : "Use 6 to 15 digits",
+      customNumber: {
+        "ui:widget": formData.certificated ? undefined : "phoneWidget",
+        "ui:placeholder": formData.certificated ? "Enter employee ID" : "Enter digits only",
+        "ui:help": formData.certificated ? "Between 3 and 6 characters" : "Use 6 to 15 digits",
       },
     }),
     [formData.certificated],
