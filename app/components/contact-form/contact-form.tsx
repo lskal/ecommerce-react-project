@@ -4,6 +4,7 @@ import type {
   UiSchema,
   WidgetProps,
   FieldTemplateProps,
+  ObjectFieldTemplateProps,
   RJSFValidationError,
 } from "@rjsf/utils";
 import validator from "@rjsf/validator-ajv8";
@@ -24,11 +25,7 @@ const schema: RJSFSchema = {
       title: "Regular Contact",
       properties: {
         name: { type: "string", title: "Name Surname", pattern: "^[a-zA-Z\\s]+$" },
-        customNumber: {
-          type: "string",
-          title: "Phone number",
-          pattern: "^[0-9]{6,15}$",
-        },
+        customNumber: { type: "string", title: "Phone number", pattern: "^[0-9]{6,15}$" },
         certificated: { type: "boolean", title: "Certificated?", const: false },
       },
       required: ["name", "customNumber"],
@@ -37,12 +34,7 @@ const schema: RJSFSchema = {
       title: "Certified Employee",
       properties: {
         name: { type: "string", title: "Name Surname", pattern: "^[a-zA-Z\\s]+$" },
-        customNumber: {
-          type: "string",
-          title: "Employee ID",
-          minLength: 3,
-          maxLength: 6,
-        },
+        customNumber: { type: "string", title: "Employee ID", minLength: 3, maxLength: 6 },
         certificated: { type: "boolean", title: "Certificated?", const: true },
       },
       required: ["name", "customNumber"],
@@ -53,7 +45,6 @@ const schema: RJSFSchema = {
 function PhoneWidget(props: WidgetProps) {
   const { id, value, onChange, placeholder, rawErrors } = props;
   const hasError = rawErrors && rawErrors.length > 0;
-
   return (
     <input
       id={id}
@@ -74,7 +65,6 @@ function PhoneWidget(props: WidgetProps) {
 function EmployeeIdWidget(props: WidgetProps) {
   const { id, value, onChange, placeholder, rawErrors } = props;
   const hasError = rawErrors && rawErrors.length > 0;
-
   return (
     <input
       id={id}
@@ -108,6 +98,21 @@ function CustomTemplate(props: FieldTemplateProps) {
       {children}
       <div style={{ marginTop: 8, color: "crimson" }}>{errors}</div>
       <div style={{ marginTop: 4, color: "#666" }}>{help}</div>
+    </div>
+  );
+}
+
+function CustomObjectTemplate(props: ObjectFieldTemplateProps) {
+  const byName = Object.fromEntries(props.properties.map((p) => [p.name, p.content]));
+
+  return (
+    <div>
+      <div>{byName.name}</div>
+
+      <div style={{ display: "flex", flexDirection: "row", gap: 16 }}>
+        <div style={{ flex: 1 }}>{byName.customNumber}</div>
+        <div style={{ flex: 1 }}>{byName.certificated}</div>
+      </div>
     </div>
   );
 }
@@ -150,10 +155,6 @@ export default function ContactForm() {
         "ui:placeholder": formData.certificated ? "Enter employee ID" : "Enter digits only",
         "ui:help": formData.certificated ? "Between 3 and 6 characters" : "Use 6 to 15 digits",
       },
-
-      certificated: {
-        "ui:options": { label: true },
-      },
     }),
     [formData.certificated],
   );
@@ -165,7 +166,10 @@ export default function ContactForm() {
       validator={validator}
       formData={formData}
       widgets={{ phoneWidget: PhoneWidget, employeeIdWidget: EmployeeIdWidget }}
-      templates={{ FieldTemplate: CustomTemplate }}
+      templates={{
+        FieldTemplate: CustomTemplate,
+        ObjectFieldTemplate: CustomObjectTemplate,
+      }}
       transformErrors={transformErrors}
       onChange={(e) => setFormData(e.formData as TContactFormData)}
       onSubmit={({ formData }) => alert(JSON.stringify(formData, null, 2))}
