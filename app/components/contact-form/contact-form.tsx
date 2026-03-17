@@ -18,31 +18,42 @@ type TContactFormData = {
 
 const schema: RJSFSchema = {
   type: "object",
-  required: ["name", "customNumber"],
-  properties: {
-    name: { type: "string", title: "Name Surname", pattern: "^[a-zA-Z\\s]+$" },
-    customNumber: {
-      type: "string",
-      title: "Phone number",
-      pattern: "^[0-9]{6,15}$",
-    },
-    certificated: { type: "boolean", title: "Certificated?" },
-  },
-  if: { properties: { certificated: { const: true } } },
-  then: {
-    properties: {
-      customNumber: {
-        title: "Employee ID",
-        pattern: undefined,
-        minLength: 3,
-        maxLength: 6,
+  required: ["name"],
+  oneOf: [
+    {
+      title: "Regular Contact",
+      properties: {
+        name: { type: "string", title: "Name Surname", pattern: "^[a-zA-Z\\s]+$" },
+        customNumber: {
+          type: "string",
+          title: "Phone number",
+          pattern: "^[0-9]{6,15}$",
+        },
+        certificated: { type: "boolean", title: "Certificated?", const: false },
       },
+      required: ["name", "customNumber"],
     },
-  },
+    {
+      title: "Certified Employee",
+      properties: {
+        name: { type: "string", title: "Name Surname", pattern: "^[a-zA-Z\\s]+$" },
+        customNumber: {
+          type: "string",
+          title: "Employee ID",
+          minLength: 3,
+          maxLength: 6,
+        },
+        certificated: { type: "boolean", title: "Certificated?", const: true },
+      },
+      required: ["name", "customNumber"],
+    },
+  ],
 };
 
 function PhoneWidget(props: WidgetProps) {
-  const { id, value, onChange, placeholder } = props;
+  const { id, value, onChange, placeholder, rawErrors } = props;
+  const hasError = rawErrors && rawErrors.length > 0;
+
   return (
     <input
       id={id}
@@ -50,7 +61,33 @@ function PhoneWidget(props: WidgetProps) {
       value={(value as string) || ""}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}
-      style={{ width: "100%", padding: "8px 12px", border: "1px solid #ccc", borderRadius: 8 }}
+      style={{
+        width: "100%",
+        padding: "8px 12px",
+        border: `1px solid ${hasError ? "crimson" : "#ccc"}`,
+        borderRadius: 8,
+      }}
+    />
+  );
+}
+
+function EmployeeIdWidget(props: WidgetProps) {
+  const { id, value, onChange, placeholder, rawErrors } = props;
+  const hasError = rawErrors && rawErrors.length > 0;
+
+  return (
+    <input
+      id={id}
+      type="text"
+      value={(value as string) || ""}
+      placeholder={placeholder}
+      onChange={(e) => onChange(e.target.value)}
+      style={{
+        width: "100%",
+        padding: "8px 12px",
+        border: `1px solid ${hasError ? "crimson" : "#ccc"}`,
+        borderRadius: 8,
+      }}
     />
   );
 }
@@ -76,24 +113,23 @@ function CustomTemplate(props: FieldTemplateProps) {
 }
 
 const transformErrors = (errors: RJSFValidationError[]) =>
-  errors.map((error) => {
-    if (error.name === "pattern" && error.property === ".customNumber") {
-      return {
-        ...error,
-        message: "Phone number must contain only digits and be 6 to 15 characters long",
-      };
-    }
-    if (error.name === "pattern" && error.property === ".name") {
-      return { ...error, message: "Name must contain only letters" };
-    }
-    if (error.name === "minLength" && error.property === ".customNumber") {
-      return { ...error, message: "Employee ID must be at least 3 characters" };
-    }
-    if (error.name === "maxLength" && error.property === ".customNumber") {
-      return { ...error, message: "Employee ID must be at most 6 characters" };
-    }
-    return error;
-  });
+  errors
+    .filter((error) => error.name !== "oneOf")
+    .filter((error) => !(error.name === "const" && error.property === ".certificated"))
+    .map((error) => {
+      if (error.name === "pattern" && error.property === ".customNumber")
+        return {
+          ...error,
+          message: "Phone number must contain only digits and be 6 to 15 characters long",
+        };
+      if (error.name === "pattern" && error.property === ".name")
+        return { ...error, message: "Name must contain only letters" };
+      if (error.name === "minLength" && error.property === ".customNumber")
+        return { ...error, message: "Employee ID must be at least 3 characters" };
+      if (error.name === "maxLength" && error.property === ".customNumber")
+        return { ...error, message: "Employee ID must be at most 6 characters" };
+      return error;
+    });
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<TContactFormData>({
@@ -108,10 +144,15 @@ export default function ContactForm() {
         "ui:autofocus": true,
         "ui:placeholder": formData.certificated ? "Certified person name" : "Enter full name",
       },
+
       customNumber: {
-        "ui:widget": formData.certificated ? undefined : "phoneWidget",
+        "ui:widget": formData.certificated ? "employeeIdWidget" : "phoneWidget",
         "ui:placeholder": formData.certificated ? "Enter employee ID" : "Enter digits only",
         "ui:help": formData.certificated ? "Between 3 and 6 characters" : "Use 6 to 15 digits",
+      },
+
+      certificated: {
+        "ui:options": { label: true },
       },
     }),
     [formData.certificated],
@@ -123,7 +164,7 @@ export default function ContactForm() {
       uiSchema={dynamicUiSchema}
       validator={validator}
       formData={formData}
-      widgets={{ phoneWidget: PhoneWidget }}
+      widgets={{ phoneWidget: PhoneWidget, employeeIdWidget: EmployeeIdWidget }}
       templates={{ FieldTemplate: CustomTemplate }}
       transformErrors={transformErrors}
       onChange={(e) => setFormData(e.formData as TContactFormData)}
