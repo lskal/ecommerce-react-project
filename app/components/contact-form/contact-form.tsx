@@ -7,8 +7,9 @@ import type {
   ObjectFieldTemplateProps,
   RJSFValidationError,
 } from "@rjsf/utils";
+import { withTheme, type ThemeProps } from "@rjsf/core";
+import { Theme as MuiTheme } from "@rjsf/mui";
 import validator from "@rjsf/validator-ajv8";
-import Form from "@rjsf/mui";
 
 // TODO: move to app/types/product.ts one day
 type TContactFormData = {
@@ -17,6 +18,7 @@ type TContactFormData = {
   certificated: boolean;
 };
 
+// --- schema ---
 const schema: RJSFSchema = {
   type: "object",
   required: ["name"],
@@ -41,7 +43,9 @@ const schema: RJSFSchema = {
     },
   ],
 };
+// --- schema ---
 
+// --- widgets ---
 function PhoneWidget(props: WidgetProps) {
   const { id, value, onChange, placeholder, rawErrors } = props;
   const hasError = rawErrors && rawErrors.length > 0;
@@ -81,8 +85,10 @@ function EmployeeIdWidget(props: WidgetProps) {
     />
   );
 }
+// --- widgets ---
 
-function CustomTemplate(props: FieldTemplateProps) {
+// --- templates ---
+function CustomFieldTemplate(props: FieldTemplateProps) {
   const { id, label, required, children, errors, help } = props;
   return (
     <div style={{ marginBottom: 20 }}>
@@ -104,11 +110,9 @@ function CustomTemplate(props: FieldTemplateProps) {
 
 function CustomObjectTemplate(props: ObjectFieldTemplateProps) {
   const byName = Object.fromEntries(props.properties.map((p) => [p.name, p.content]));
-
   return (
     <div>
       <div>{byName.name}</div>
-
       <div style={{ display: "flex", flexDirection: "row", gap: 16 }}>
         <div style={{ flex: 1 }}>{byName.customNumber}</div>
         <div style={{ flex: 1 }}>{byName.certificated}</div>
@@ -116,7 +120,27 @@ function CustomObjectTemplate(props: ObjectFieldTemplateProps) {
     </div>
   );
 }
+// --- templates ---
 
+// --- customTheme ---
+const ContactTheme: ThemeProps = {
+  ...MuiTheme,
+  widgets: {
+    ...MuiTheme.widgets,
+    phoneWidget: PhoneWidget,
+    employeeIdWidget: EmployeeIdWidget,
+  },
+  templates: {
+    ...MuiTheme.templates,
+    FieldTemplate: CustomFieldTemplate,
+    ObjectFieldTemplate: CustomObjectTemplate,
+  },
+};
+
+const CustomForm = withTheme(ContactTheme);
+// --- customTheme ---
+
+// --- errors ---
 const transformErrors = (errors: RJSFValidationError[]) =>
   errors
     .filter((error) => error.name !== "oneOf")
@@ -135,6 +159,7 @@ const transformErrors = (errors: RJSFValidationError[]) =>
         return { ...error, message: "Employee ID must be at most 6 characters" };
       return error;
     });
+// --- errors ---
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<TContactFormData>({
@@ -160,16 +185,11 @@ export default function ContactForm() {
   );
 
   return (
-    <Form
+    <CustomForm
       schema={schema}
       uiSchema={dynamicUiSchema}
       validator={validator}
       formData={formData}
-      widgets={{ phoneWidget: PhoneWidget, employeeIdWidget: EmployeeIdWidget }}
-      templates={{
-        FieldTemplate: CustomTemplate,
-        ObjectFieldTemplate: CustomObjectTemplate,
-      }}
       transformErrors={transformErrors}
       onChange={(e) => setFormData(e.formData as TContactFormData)}
       onSubmit={({ formData }) => alert(JSON.stringify(formData, null, 2))}
