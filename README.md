@@ -1,6 +1,6 @@
 # DEPLOY github-pages: 
 
-[github-pages deploy of the project](https://lskal.github.io/ecommerce-react-project){:target="_blank"}
+[github-pages deploy of the project](https://lskal.github.io/ecommerce-react-project)
 
 ---
 
