@@ -1,3 +1,8 @@
+# DEPLOY github-pages: 
+(lskal.github.io/ecommerce-react-project)](lskal.github.io/ecommerce-react-project)
+
+---
+
 # Welcome to React Router!
 
 A modern, production-ready template for building full-stack React applications using React Router.
